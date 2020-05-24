@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문서의 기하학적 특성(크기, 좌표)</title>
+</head>
+<body>
+    <p id='whatisthis'>이뭐꼬</p>
+    <script>
+        // 1. 요소의 크기와 위치
+        var t = document.getElementById('whatisthis')
+        console.log(t.getBoundingClientRect())
+
+        // 2. viewport(뷰포트)
+        /*
+        뷰포트(viewport)는 웹문서의 전체내용 중에서 사용자에게 보여주는 영역을 말한다. (브라우저 창의 영역)
+        따라서 문서의 좌표와, 뷰포트의 좌표는 다르다.
+        
+        */
+    </script>
+</body>
+</html>
