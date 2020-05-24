@@ -3,3 +3,24 @@
 어떤 사건을 이벤트라고 하는데, 
 브라우저에선 사용자가 클릭했을 때, 스크롤 했을 때, 커서를 올렸을 때 같은 것들이 이벤트다.
 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event(이벤트)란</title>
+</head>
+<body>
+    <input type="button" onclick="alert('이벤트 두둥등장!')" value="이벤트 실행?">
+    <!--
+    input 태그의 onclick 속성값인 자바스크립트 코드 alert()함수는 사용자가 버튼을 클릭했을 때(onclick) 실행된다.
+    이같이 js개발자가 어떤 일(이벤트)가 발생했을 때 실행되는 코드를 등록하고, 브라우저는 그 일(이벤트)가 발생했을 때 등록된 코드를 실행한다.
+    이런 것을 이벤트 프로그래밍이라고도 한덴다.
+
+    여기서 event target(이벤트 타겟)은 이벤트가 일어날 객체(여기선 input 태그의 객체)를 말하며,
+    event type(이벤트 타입)은 이벤트의 종류(여기선 click)를 말한다. (이말고도 이벤트 종류는 엄청많다.)
+    (다양한 이벤트 종류에 대해선, https://developer.mozilla.org/ko/docs/Web/Events 참고)
+    event handler(이벤트 핸들러)는 이벤트가 발생될 때 동작되는 코드(여기선 alert('이벤트 두둥등장!'))를 말한다.
+    -->
+</body>
+</html>
