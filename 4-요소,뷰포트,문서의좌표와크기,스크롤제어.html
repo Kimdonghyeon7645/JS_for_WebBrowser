@@ -4,19 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>문서의 기하학적 특성(크기, 좌표)</title>
+    <style>
+        #whatisthis{
+            background-color: aqua;
+            width: 60px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
     <p id='whatisthis'>이뭐꼬</p>
     <script>
-        // 1. 요소의 크기와 위치
+        // 1. 요소(엘리먼트)의 크기와 위치
         var t = document.getElementById('whatisthis')
         console.log(t.getBoundingClientRect())
+        /*
+        요소(엘리먼트)의 가로 세로 크기를 알아내고 싶을때, 직접 자로 길이를 재서 프로그래밍을 할 수는 없기에, 
+        자바스크립트에서 웹브라우저가 제공하는 api를 활용한다.
+        바로 .getBoundingClientRect() 
+        이 api다.
+        메서드의 이름을 보면, get(구하다) + Bounding(테두리, 바운딩) + Client(클라이언트) + Rect(사각형) 인 것을 알 수 있는데,
+        말그대로 ClientRect 를 반환하는 메서드다. (현재는 DOMRect가 반환되는 것 같다.)
+        
+        그리고 메서드가 반환한 값을 출력하면, 
+        x: 8
+        y: 16
+        width: 60
+        height: 20
+        top: 16
+        right: 68
+        bottom: 36
+        left: 8
+        가 출력된다.
+        
+        여기서 요소의 맨 왼쪽 윗쪽 꼭짓점을 기준으로, x, y 좌표를 각각 x, y 값에 저장하고(px),
+        left는 문서의 시작부터, 요소의 왼쪽 모서리까지의 길이(px),
+        top은 문서의 시작부터, 요소의 위쪽 모서리까지의 길이(px),
+        height는 요소의 총 높이(세로길이)(px),
+        width는 요소의 총 너비(가로길이)(px),
+        right는 문서의 시작부터, 요소의 오른쪽 모서리까지의 길이(left+width)(px),
+        bottom은 문서의 시작부터, 요소의 아래쪽 모서리까지의 길이(top+height)(px),
+        가 된다.
+        
+        참고로 여기서 길이는, 요소의 콘텐츠 + 패딩 + 테두리(보더)의 길이를 포함한 길이로, 
+        요소의 마진(margin)길이는 여기에서 길이로 포함하지 않는점을 유의하자.
+        */
+        console.log(t.offsetParent)
+        /*
+        참고로 다른 요소(엘리먼트)에 감싸여있는 요소(엘리먼트)의 길이를 재도, 기준은 body로 해서 길이를 계산하기에
+        문서(body)영역을 기준으로 요소의 길이를 비교하게 된다.
+
+        이것은 (요소(엘리먼트)객체).offsetParent 를 사용해서 offsetParent로 길이를 잴때 기준이 되는 요소를 출력할 수 있으며,
+        대부분은 body요소가 출력된다.
+        근데 예외로 부모중 td, th, table 같은, CSS 위치값이 static인 요소(엘리먼트)가 있다면, 그 부모 요소가 offsetParent가 된다.
+        (오래된 브라우저가 getBoundingClientRect를 지원안하면, offsetLeft, offsetTop프로퍼티를 사용한다.)
+
+        만약에 요소의 콘텐츠 + 패딩 + 테두리(보더)로 길이를 재는데, 여기서 테두리를 제외한 엘리먼트 크기를 알고싶으면,
+        ClientWidth 와 ClientHeight 를 사용하면 된다.
+        */
+        // 사실 여기서 요소의 위치를 생각할때, 문서가 브라우저 창 크기보다 커지는 경우, 생기는 스크롤에 따라서 위치에 값이 달라지기 때문에 좀 더 복잡해진다.
+
 
         // 2. viewport(뷰포트)
+        setInterval(function(){     // setInterval()은 첫번째 인자의 함수를, 두번째 인자의 시간값만큼 주기적으로 실행한다.
+            console.log(t.getBoundingClientRect().top, window.pageYOffset)
+        }, 1000)
         /*
-        뷰포트(viewport)는 웹문서의 전체내용 중에서 사용자에게 보여주는 영역을 말한다. (브라우저 창의 영역)
-        따라서 문서의 좌표와, 뷰포트의 좌표는 다르다.
+        뷰포트(viewport)는 웹문서의 전체내용 중에서 브라우저가 사용자에게 보여주는 영역을 말한다. (브라우저 창의 영역)
+        사실, 문서가 뷰포트보다 커질경우 스크롤이 생기기에, 문서의 좌표와, 뷰포트의 좌표는 달라진다.
         
+        여기서 위에서 사용한 getBoundingClientRect() 함수는 사실 문서의 좌표를 사용하는 것이 아니라, viewport의 좌표를 사용한다.
+        그래서 기준은 body라고 offsetParent에선 출력했어도, 정작 길이를 잴땐, 뷰포트(창)에서 요소와의 길이를 잰다.
+        따라서 스크롤을 해서 요소와 뷰포트가 가까워지면 길이가 줄어들고, 멀어지면 길이도 늘어난다.
+
+        추가로
+        window.pageYOffset, window.pageYOffset 에선 스크롤의 정도(px)를 구할수 있다. (pageYOffset는 y축(상하스크롤), pageXOffset는 x축(좌우스크롤)) 
+        (오래된 브라우저가 pageYOffset을 지원 안하면 scrollTop 으로 상하 스크롤, scrollLeft로 좌우 스크롤값을 가져오자.)
+
+        아래로 스크롤 한만큼 pageYOffset 의 값이 증가하는데, getBoundingClientRect() 과 같이 사용한다면, 
+        스크롤 때문에 요소와 뷰포트의 길이가 가까워진만큼 getBoundingClientRect() 의 길이가 줄어드는 것을 볼 수 있다. 
+        (getBoundingClientRect().top 이 10 감소하면, pageYOffset 가 10 증가한다.)  
+        */
+
+
+        // 3. 스크롤 제어
+        window.scrollTo(0, 1000)
+        /*
+        스크롤은 scrollTo(x스크롤값(px), y스크롤값(px)) 으로 프로그램으로 스크롤을 직접 제어할 수 있다.
+        위 코드를 입력하면, x축은 0만큼, y축은 1000만큼 스크롤 된다. 
+        */
+
+
+        // 4. 스크린 크기 알아보기
+        console.log('뷰포트, window.innerWidth:', window.innerWidth, 'window.innerHeight:', window.innerHeight);
+        console.log('스크린, screen.width:', screen.width, 'screen.height:', screen.height);
+        /*
+        스크린의 크기는 모니터의 크기와 브라우저 뷰포트(viewport)의 크기, 2가지가 있었다.
+        이것들의 크기를 알아내는 방법은,
+        뷰포트 크기는 window.innerWidth(너비)와 window.innerHeight(높이),
+        모니터(스크린) 크기는 screen.width(너비)와 screen.height(높이)
+        와 같이 구할 수 있다.
         */
     </script>
 </body>
