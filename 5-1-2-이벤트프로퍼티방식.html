@@ -1,0 +1,24 @@
+<!--
+이벤트를 등록하는 방식중 하나인, 
+프로퍼티 리스너 방식은 이벤트 대상에 해당하는 객체의 프로퍼티로 이벤트를 등록하는 방식이다.
+
+인라인 방식에 비해 HTML과 JavaScript를 분리하는 점에서 선호되지만, 
+사실 뒤에서 배울 addEventListener 방식을 더 추천한다.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로퍼티 방식</title>
+</head>
+<body>
+    <input type="button" id="target" value="button">
+    <script>
+        var t = document.getElementById('target');
+        t.onclick = function(){
+            alert('프로퍼티 방식 이벤트 등록!');
+        }
+    </script>
+</body>
+</html>
