@@ -1,3 +1,12 @@
+<!--
+이벤트 등록방식에는 3가지 방식이있다.
+그중에서 간단한 방식은 인라인(inline)방식이다. 
+
+인라인 방식은 이벤트를 이벤트 대상속 태그(이벤트 타겟)에 속성값으로 지정하는 것이다.
+여기서 이벤트 핸들러(이벤트를 실행하는 js 코드)를 2가지 방법으로 사용할 수 있다.
+하나는 예전처럼 직접 getElement~()함수 등으로 타겟을 찾는 방식과, 
+두번째는 this 키워드로 직접 자기사진을 손쉽게 이벤트 대상으로 지정하는 방식이 있다.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +15,17 @@
     <title>inline(인라인)방식으로 이벤트 등록하기</title>
 </head>
 <body>
-    
+    <!-- 자기 자신을 참조하는 방법 1 : 직접 getElement~()함수로 이벤트 대상을 지정 자기자신을 가리킬때는 불편함. -->
+    <input type="button" id="target" onclick="alert('Hello world, '+document.getElementById('target').value);" value="button">
+    <!-- 자기 자신을 참조하는 방법 2 : this 키워드로, 직접 자기자신을 이벤트 대상으로 지정 -->
+    <input type="button" onclick="alert('Hello world, '+this.value);" value="button">
 </body>
 </html>
+<!--
+인라인 방식에는 장단점이 있다.
+장점은 이벤트 타겟의 태그에 이벤트가 직접 포함되있어서, 이벤트 타겟을 파악하기 매우 쉽다.
+단점은 직접 html 태그에 js코드를 넣었기 때문에, 정보부분(html)과 제어부분(JavaScript)이 혼재된 불편한 코드가 된다.
+
+
+그래서 사실 이방식보다는 다음에 배울 프로퍼티 방식과 addEventListener() 함수를 사용하는 방식으로 이벤트를 등록하는 것이 바람직하다.
+-->
