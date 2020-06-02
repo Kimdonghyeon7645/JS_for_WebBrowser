@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>submit change blur focus 이벤트 타입</title>
+</head>
+<body>
+    <form id='target'>
+        <label>김동현을 입력 : <input type="text" id="word"></label> <br>
+        <input type="submit">
+    </form>
+
+    <script>
+        var t = document.getElementById('target');
+        t.addEventListener('submit', function(event){
+            if(document.getElementById('word').value !== '김동현'){
+                alert("김동현이 없잖어")
+            }
+        })
+        /*
+        submit 이벤트 타입은, 폼의 정보를 서버로 전송하는 submit 명령이 실행될 때 이벤트가 일어난다.
+        
+        */
+    </script>
+</body>
+</html>
