@@ -6,21 +6,73 @@
     <title>submit change blur focus 이벤트 타입</title>
 </head>
 <body>
-    <form id='target'>
-        <label>김동현을 입력 : <input type="text" id="word"></label> <br>
+    <form id='submit'>
+        <label>루비를 입력하세요 : <input type="text" id="word"></label> <br>
         <input type="submit">
     </form>
 
+    <form id='change'>
+        <p>
+            원하는 언어를 선택하세요 : 
+            <select>
+                <option>파이썬</option>
+                <option>Python</option>
+                <option>Py3</option>
+            </select>
+        </p>
+        <p>
+            원하는 값을 입력하세요 : 
+            <input type="text" class="text">
+        </p>
+        <p>
+            원하는 값을 입력하세요 :
+            <textarea class='rongtext' cols="30" rows="10"></textarea>
+        </p>
+    </form>
+    <p>
+        <input id='focus' type="text">
+    </p>
+
     <script>
-        var t = document.getElementById('target');
+        var t = document.getElementById('submit')
         t.addEventListener('submit', function(event){
-            if(document.getElementById('word').value !== '김동현'){
-                alert("김동현이 없잖어")
+            if(document.getElementById('word').value !== '루비'){
+                alert("루비가 아니잖어")
+            }else{
+                alert("루비 요즘 누가써요? ㅎㅎ")
             }
         })
         /*
-        submit 이벤트 타입은, 폼의 정보를 서버로 전송하는 submit 명령이 실행될 때 이벤트가 일어난다.
+        submit 이벤트 타입은, 폼의 정보를 서버로 전송하는 submit 명령이 실행될 때 이벤트가 발생한다.
+        해당 submit 버튼이 있는 form 태그를 이벤트 타겟으로한다.
+        */
+
+        t = document.getElementById('change')
+        t.getElementsByTagName('select')[0].addEventListener('change', function(){
+            alert('니가 선택한 거 : ' + t.getElementsByTagName('select')[0].value)
+        })
+        t.getElementsByClassName('text')[0].addEventListener('change', function(event){
+            alert('니가 입력한 값 : ' + event.target.value)
+        })
+        t.getElementsByClassName('rongtext')[0].addEventListener('change', function(){
+            alert('니가 입력한 디따리 많은 값 : ' + t.getElementsByClassName('rongtext')[0].value)
+        })
+        /*
+        change 이벤트 타입은, 폼안의 값, 데이터가 변경되었을 때 이벤트가 발생한다.
+        input(text,radio,checkbox), textarea, select 태그 등에서 적용된다.
+        */
         
+        t = document.getElementById('focus')
+        t.addEventListener('focus', function(){
+            console.log('focus 중!')
+        })
+        t.addEventListener('blur', function(){
+            console.log('blur 중!') 
+        })
+        /*
+        focus 와 blur 이벤트 타입은, 각각 요소에 포커스가 생겼을 때와 사라졌을 때 이벤트가 발생한다.
+        요소를 클릭하거나 해서 포커스를 맞추면 focus 이벤트가 되며, 다른 곳을 클릭해서 포커스를 안맞추면 blur 이벤트가 된다.
+        <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, <title> 를 제외한 모든 태그에서 발생한다고 한다.
         */
     </script>
 </body>
