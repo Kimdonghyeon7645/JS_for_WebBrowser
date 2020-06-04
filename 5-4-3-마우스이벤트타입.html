@@ -3,15 +3,20 @@
 웹브라우저에서도 마우스와 관련되서는 많은 이벤트 타입을 지원하는데,
 
 클릭했을 때 발생하는 이벤트 : click,
-더블클릭했을 때 발생하는 이벤트 : dbclick,
+더블클릭했을 때 발생하는 이벤트 : dbclick, 
 마우스버튼을 누를때 발생하는 이벤트 : mousedown,
 마우스버튼을 땔 때 발생하는 이벤트 : mouseup,
-마우스가 엘리먼트에 진입할 때 발생하는 이벤트 : mouseover,
-마우스가 엘리먼트에 벗어날 때 발생하는 이벤트 : mouseout,
+마우스가 해당 엘리먼트(요소)에 진입할 때 발생하는 이벤트 : mouseover,
+마우스가 해당 엘리먼트(요소)에 벗어날 때 발생하는 이벤트 : mouseout,
 컨텍스트 메뉴가 실행될 때(마우스 오른쪽 버튼을 누를때) 발생하는 이벤트 : contextmenu
 
-여기서 마우스 이벤트가 특수키(alt, ctrl, shift)가 눌러진 상태로 호출되는 것을
-이벤트 객체의 프로퍼티로 판별할 수 있다.
+여기서 마우스 이벤트가 특수키(alt, ctrl, shift)가 눌러진 상태로 호출되는 것을 이벤트 객체의 프로퍼티로 판별할 수 있다.
+쉬프트 키가 눌려있을 때, event.shiftKey 가 true 가 됨,
+알트 키가 눌려있을 때, event.altKey 가 true 가 됨,
+컨트롤 키가 눌려있을 때, event.ctrlKey 가 true 가 됨,
+
+추가로 마우스 포인터의 위치를 알아내고 싶을때,
+이벤트 객체의 clientX, clientY로 각각 마우스 포인터의 x, y 좌표를 구할 수 있음.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +24,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마우스 이벤트 타입</title>
+
+    <style>
+        #target{
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            font-weight: 700;
+            font-size: larger;
+            color:white; 
+            background-color: greenyellow;
+        }
+    </style>
 </head>
 <body>
-    
+    <h3>콘솔창을 확인</h3>
+    <p id='target'>타겟</p>
+
+    <script>
+        var t = document.getElementById('target')
+
+        function handler(event){
+            console.group(event.type + '이벤트')
+            if(event.shiftKey)  console.log('쉬프트 키가 같이 눌린 상태입니다!')
+            if(event.altKey)  console.log('알트 키가 같이 눌린 상태입니다!')
+            if(event.ctrlKey)  console.log('컨트롤 키가 같이 눌린 상태입니다!')
+            console.log('마우스 커서 x : ' + event.clientX + ', 마우스 커서 y : ' + event.clientY)
+            console.groupEnd()
+        }
+
+        t.addEventListener('click', handler)        
+        t.addEventListener('dbclick', handler)
+        t.addEventListener('mousedown', handler)
+        t.addEventListener('mouseup', handler)
+        t.addEventListener('mouseover', handler)
+        t.addEventListener('mouseout', handler)
+        t.addEventListener('contextmenu', handler)
+    </script>
 </body>
 </html>
