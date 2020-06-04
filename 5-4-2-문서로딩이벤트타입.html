@@ -1,3 +1,10 @@
+<!--
+웹페이지(문서)를 js코드를 사용해서 제어할려면 웹페이지 모든 요소에 대한 처리가 된 상태여야된다.
+이렇게 웹페이지 모든 요소에 대해 처리가 끝났을 때를 알려주는, 이벤트가 load, DOMContentLoaded 다.
+
+이 이벤트는, 웹 페이지 요소가 처리(load)된 후가 되면 발생하는 이벤트기에, 
+미리 요소가 처리되기 전에 js로 요소를 제어하는 코드를 넣기위해 사용한다.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +13,36 @@
     <title>문서로딩 이벤트 타입</title>
 </head>
 <body>
+    <script>
+        var t = document.getElementById('target')
+        alert(t.value)
+    </script>
     
+    <p id='target'>하하핳</p>
+    <!--
+    위같이 p태그의 요소를 js로 제어하는 코드를 요소보다 위에 둔다면, 요소를 제어할 수 없다.
+    왜냐면 요소가 로드되기전에 js가 실행되었기에, 그상태에서는 제어할려는 요소가 없는 상태기 때문이다.
+    
+    이럴 경우엔, 요소 뒤에 script로, js코드가 뒤에 오도록 하거나,
+    load, DOMContentLoaded 이벤트를 이용하면 된다.
+    -->
+
+    <script>
+        window.addEventListener('load', () => {
+            var t2 = document.getElementById('target2')
+            alert(t2.value)
+        })
+    </script>
+    
+    <p id='target2'>하하핳</p>
+    <!--
+    load 이벤트는 문서안의 모든 리소스(동영상, 이미지, 스크립트 등등)가 모두 로드가 된 후에 발생하는 이벤트라서,
+    이 이벤트안에 있는 이벤트 핸들러(js코드)는 문서안의 모든 리소스가 로드된 후에 실행되기에 로드될 예정의 요소들도 제어할 수 있다.
+
+    대신에 load는 모든 리소스가 로드되야되서, 구동이 너무 느려지는 문제가 있는데, 
+    DOMContentLoaded 는 load와 비슷한 이벤트지만, 모든 리소스가 아닌, 문서에서 스크립트 작업을 할 수 있을 때 실행되기에,
+    이미지같은 리소스가 로드되는 것을 기다릴 필요없이 이벤트 핸들러를 실행할 수 있다.
+    (IE9를 포함한 모든 브라우저에서 DOMContentLoader 이벤트를 지원한다.)
+    -->
 </body>
 </html>
