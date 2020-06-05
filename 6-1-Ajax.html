@@ -18,6 +18,53 @@
     <title>Ajax 배우자!</title>
 </head>
 <body>
-    
+    <!--
+    사실 서버 환경이 구축되야 예제가 실행되는데, 
+    생략해도 예제만 실행이 안되지, 배우는데는 영향이 없으니까 서버부분은 생략한다.
+    -->
+    <input type="button" value="GET방식" id='get'>
+    <input type="text" placeholder="POST으로 서버에 전송할 텍스트를 입력하세요" id='text'>
+    <input type="button" value="POST방식" id='post'>
+    <script>
+        document.querySelector('#get').addEventListener('click', function(event){  
+            // input 버튼을 클릭했을 때, 이벤트 핸들러안에 XMLHttpRequest 객체를 만들고 서버로 보내서, 통신이 되도록 하였다.
+            var ha = new XMLHttpRequest()
+            // 우선 XMLHttpRequest 객체를 생성하고,
+            ha.open('GET', '서버 리소스 주소')
+            // XMLHttpRequest 객체를 여는데, 첫번째인자로 GET(http 메서드)방식으로 통신을 정하고, 두번째 인자로 통신할 서버 리소스 주소를 정해주었다.
+            ha.onreadystatechange = function(){
+                // .onreadystatechange 이벤트는 서버와의 통신이 끝났을 때 발생하는 이벤트며, 이벤트 핸들러(함수)를 정의해서, 이벤트가 발생할 때 정의한 함수가 실횅된다.
+                if(ha.readyState === 4 && ha.status === 200){   
+                    // .readyState 와 .status 는 XMLHttpRequest 객체의 프로퍼티로, 
+                    // readyState의 통신이 완료될 때 값이 4가 되며, status는 http 표준 응답코드 값을 가지며, 서버가 요청을 제대로 처리할때는 200의 값을 가진다.
+                    alert('서버에서 가져온 데이터 : ' + ha.responseText)
+                    // .responseText 는 XMLHttpRequest 객체의 프로퍼틴데, 서버에서 전송한 데이터를 담고있다. 
+                    // 여기서는 이것을 alert() 함수로 알림창에 띄어주는 코드를 실행한다.
+                }
+            }
+            ha.send()
+            // 실제로 open에서 정의했던 GET형식과, 서버 리소스 주소로 통신을 시작한다.
+            // 이렇게 통신이 시작되고, 되고나서, 끝났을 때가 각각의 이벤트가 되며, 이 이벤트에 위같이(.onreadystatechange) 이벤트 핸들러를 대입해서, 해당 이벤트에 실행될 js코드를 작성할 수 있다. 
+        })
+
+
+        // 위는 GET 요청을 처리했는데, 반대로 POST로 서버에 값을 보내는 코드를 작성해보자.
+        document.querySelector('#post').addEventListener('click', function(event){
+            var haha = new XMLHttpRequest()
+            // 여기까진 get 과 같다.
+            haha.open('POST', '서버 리소스 주소')
+            // get과 다르게 첫번째인자로 HTTP Method를 GET에서 POST로 바꿨다. (전달받는 서버의 리소스(파일)이 GET과 다르다면, 이부분도 다르게 해줘야 할 것이다.)
+            haha.onreadystatechange = function(){
+                alert('서버로 보낸 데이터 : ' + haha.responseText)
+            }
+            // get처럼 서버와 통신이 끝났을 때, 서버에서 전달받은 값을 다시 전달해줄 때, 그것을 받아서 alert()로 띄우는 코드를 입력해주었다.
+            haha.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+            // get과 다르게 .setRequestHeader 로, 서버로 전송할 데이터 타입의 형식(MIME)을 지정했다.
+            var data = 'text=' + document.getElementById('text').value
+            haha.send(data)
+            // 위같이 send 메서드로 통신을 시작할 때, 인자값으로 서버에 전달할 데이터를 넘겨준다. 
+            // 참고로 서버로 데이터를 전송할 때, '이름=값?이름=값...'과 같은 형식을 지켜서 전송한다.
+        })
+    </script>
 </body>
 </html>
