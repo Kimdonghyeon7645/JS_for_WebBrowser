@@ -1,0 +1,13 @@
+html{
+    background-color: cadetblue;
+}
+
+.js-clock{
+    padding: 15em;
+}
+
+.js-clock h1{ 
+    text-align: center;
+    font-size: 6em;
+    color: white;
+}
