@@ -5,8 +5,20 @@ const form = document.querySelector('.js-form'),
 const USER_LS = 'user',
     SHOWING_CN = 'showing';
 
+function saveName(text){
+    localStorage.setItem(USER_LS, text);
+}
+
+function handleSubmit(event){
+    event.preventDefault();
+    const Value = input.value;
+    paintGreeting(Value);
+    saveName(Value);
+}
+
 function askName(){
     form.classList.add(SHOWING_CN);
+    form.addEventListener('submit', handleSubmit);
 }
 
 function paintGreeting(text){
