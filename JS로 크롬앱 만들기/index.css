@@ -18,6 +18,17 @@ body{
     display: none;
 }
 
+.js-toDoForm,
+.js-toDoList{
+    text-align: center;
+}
+
+li{
+    list-style: none;
+    color: aliceblue;
+    font-size: 1.2em;
+}
+
 .js-grettings{
     text-align: center;
     font-size: 1.5em;
