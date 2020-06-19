@@ -1,11 +1,11 @@
 body{
-    padding: 10em;
     background-color: black;
 }
 
-.js-clock h1{ 
+.js-clock h1{
+    padding-top: 0.5em;
     text-align: center;
-    font-size: 6em;
+    font-size: 8em;
     color: white;
 }
 
@@ -13,6 +13,24 @@ body{
 .greeings{
     text-align: center;
     display: none;
+}
+
+input {
+    background: none;
+    appearance: none;
+    border: 0;
+    font-size: 1.3em;
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+input::placeholder{
+    color: white;
+}
+
+button{
+    background: none;
+    border: 0;
 }
 
 .js-toDoForm,
@@ -23,12 +41,18 @@ body{
 li{
     list-style: none;
     color: aliceblue;
-    font-size: 1.2em;
+    font-size: 1.5em;
+    padding-bottom: 0.6em;
+}
+
+li:hover{
+    font-size: 1.55em;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .js-grettings{
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2em;
     color: white;
 }
 
@@ -50,7 +74,7 @@ li{
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     z-index: -1;
     animation: fadeIn .4s linear;
 }
