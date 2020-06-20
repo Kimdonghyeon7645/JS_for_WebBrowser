@@ -18,3 +18,5 @@ HTML은 갖다놓고, CSS 은 꾸미고, JS 는 시킨다라고 흔히 비유합
 배운 내용들을 수합해서 이곳에 올릴려고 합니다.
 
 > 2020-5-23 : Java-script 공부한 내용 정리repo에서 내용이 너무 길어져서 분화했습니다.
+
+> 2020-6-20 : JS 학습이 끝나고, 실제로 JS 앱을 만들어본 폴더를 분화해서 옮겼습니다. [링크](https://github.com/Kimdonghyeon7645/JS_nomad_tutorial)
